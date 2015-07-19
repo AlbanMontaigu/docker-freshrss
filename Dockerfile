@@ -18,7 +18,7 @@ ENV FRESHRSS_VERSION="1.1.1"
 # System update & install the PHP extensions we need
 # @see http://freshrss.org/#requirements
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y libpng12-dev libjpeg-dev libgmp3c2 \
+    && apt-get install -y libpng12-dev libjpeg-dev libgmp-dev libgmp10 \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd \
@@ -26,7 +26,6 @@ RUN apt-get update && apt-get upgrade -y \
     && docker-php-ext-install zip \
     && docker-php-ext-install gmp \
     && docker-php-ext-install pdo_mysql
-
 
 # Get FreshRSS and install it
 RUN mkdir -p --mode=777 /var/local/backup/freshrss \
