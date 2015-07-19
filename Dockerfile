@@ -19,7 +19,12 @@ ENV FRESHRSS_VERSION="1.1.1"
 RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-    && docker-php-ext-install gd
+    && docker-php-ext-install gd \
+    && docker-php-ext-install mbstring \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install gmp \
+    && docker-php-ext-install pdo_mysql
+
 
 # Get FreshRSS and install it
 RUN mkdir -p --mode=777 /var/local/backup/freshrss \
@@ -36,7 +41,7 @@ RUN mkdir -p --mode=777 /var/local/backup/freshrss \
     && rm freshrss.tgz \
     && chown -R nginx:nginx /usr/src/freshrss
 
-# NGINX tuning for SHAARLI
+# NGINX tuning for FRESHRSS
 COPY ./nginx/conf/sites-enabled/default.conf /etc/nginx/sites-enabled/default.conf
 
 # Entrypoint to enable live customization
