@@ -24,6 +24,7 @@ RUN apt-get update && apt-get upgrade -y \
     && docker-php-ext-install gd \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install zip \
+    && docker-php-ext-configure gmp --with-gmp=/usr/include/x86_64-linux-gnu \
     && docker-php-ext-install gmp \
     && docker-php-ext-install pdo_mysql
 
