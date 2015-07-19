@@ -16,8 +16,10 @@ MAINTAINER alban.montaigu@gmail.com
 ENV FRESHRSS_VERSION="1.1.1"
 
 # System update & install the PHP extensions we need
+# @see http://freshrss.org/#requirements
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var/lib/apt/lists/* \
+    && apt-get install -y libpng12-dev libjpeg-dev libgmp3c2 \
+    && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd \
     && docker-php-ext-install mbstring \
