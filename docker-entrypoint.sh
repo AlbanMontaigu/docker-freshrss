@@ -13,7 +13,7 @@ tar -zcf /var/backup/freshrss/freshrss-v$(date '+%y%m%d%H%M%S').tar.gz /var/www
 echo >&2 "Installing or upgrading freshrss in $(pwd) - copying now..."
 find -maxdepth 1 ! -regex '^\./data.*$' ! -regex '^\.$' -exec rm -rf {} +
 tar cf - --one-file-system -C /usr/src/freshrss . | tar xf -
-chown -R nginx:nginx *
+chown -R nginx:nginx ./
 echo >&2 "Complete! FreshRSS has been successfully installed / upgraded to $(pwd)"
 
 # Exec main command
