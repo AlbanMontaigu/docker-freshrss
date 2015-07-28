@@ -2,7 +2,7 @@
 set -e
 
 # Backup the prev install in case of fail...
-tar -zcf freshrss-v$(date '+%y%m%d%H%M%S').tar.gz /var/local/backup/freshrss
+tar -zcf /var/backup/freshrss/freshrss-v$(date '+%y%m%d%H%M%S').tar.gz /var/www
 
 # Since freshrss can be upgraded by overwriting files do the upgrade !
 # @TODO use VERSION file to check if necessary

@@ -29,7 +29,7 @@ RUN apt-get update && apt-get upgrade -y \
     && docker-php-ext-install pdo_mysql
 
 # Get FreshRSS and install it
-RUN mkdir -p --mode=777 /var/local/backup/freshrss \
+RUN mkdir -p --mode=777 /var/backup/freshrss \
     && mkdir -p --mode=777 /usr/src/freshrss \
     && curl -o freshrss.tgz -SL https://github.com/FreshRSS/FreshRSS/archive/$FRESHRSS_VERSION.tar.gz \
     && tar -xzf freshrss.tgz --strip-components=1 -C /usr/src/freshrss \
@@ -50,7 +50,7 @@ COPY ./nginx/conf/sites-enabled/default.conf /etc/nginx/sites-enabled/default.co
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 # Volume for freshrss backup
-VOLUME /var/local/backup/freshrss
+VOLUME /var/backup/freshrss
 
 # grr, ENTRYPOINT resets CMD now
 ENTRYPOINT ["/docker-entrypoint.sh"]
