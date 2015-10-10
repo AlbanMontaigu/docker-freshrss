@@ -36,7 +36,7 @@ RUN mkdir -p --mode=777 /var/backup/freshrss \
         --exclude=LICENSE \
         --exclude=tests \
     && rm freshrss.tgz \
-    && chown -R nginx:nginx /usr/src/freshrss
+    && chown -Rfv nginx:nginx /usr/src/freshrss
 
 # Entrypoint to enable live customization
 COPY docker-entrypoint.sh /docker-entrypoint.sh
