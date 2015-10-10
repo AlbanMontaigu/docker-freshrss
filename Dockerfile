@@ -43,9 +43,6 @@ RUN mkdir -p --mode=777 /var/backup/freshrss \
     && rm freshrss.tgz \
     && chown -R nginx:nginx /usr/src/freshrss
 
-# NGINX tuning for FRESHRSS
-COPY ./nginx/conf/sites-enabled/default.conf /etc/nginx/sites-enabled/default.conf
-
 # Entrypoint to enable live customization
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
