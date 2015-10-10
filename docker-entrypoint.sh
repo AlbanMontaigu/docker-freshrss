@@ -24,10 +24,22 @@ echo >&2 "[INFO] Complete! Backup successfully done in $(pwd)"
 echo >&2 "[INFO] ---------------------------------------------------------------"
 echo >&2 "[INFO] Installing or upgrading freshrss in $(pwd) - copying now..."
 echo >&2 "[INFO] ---------------------------------------------------------------"
+echo >&2 "[INFO] Checking if this is and upgrade"
+frss_upgrade=0
+if [ -f ./data/config.php ] 
+then
+    frss_upgrade=1
+fi
+echo >&2 "[INFO] frss_upgrade = $frss_upgrade"
 echo >&2 "[INFO] Removing old installation"
 find -maxdepth 1 ! -regex '^\./data.*$' ! -regex '^\.$' -exec rm -rvf {} +
 echo >&2 "[INFO] Extracting new installation"
 tar cvf - --one-file-system -C /usr/src/freshrss . | tar xvf -
+echo >&2 "[INFO] If upgrade, will remove the data/do-install.txt file (if not you won't see remove log)"
+if [ $frss_upgrade -eq 1 ]
+then
+     rm -rvf ./data/do-install.txt
+fi
 echo >&2 "[INFO] Fixing rights"
 chown -Rfv nginx:nginx .
 echo >&2 "[INFO] Complete! FreshRSS has been successfully installed / upgraded to $(pwd)"
