@@ -7,26 +7,21 @@
 # ================================================================================================================
 
 # Base is a nginx install with php
-FROM amontaigu/nginx-php
+FROM amontaigu/nginx-php-plus:5.6.14
 
 # Maintainer
 MAINTAINER alban.montaigu@gmail.com
 
 # FreshRSS env variables
-ENV FRESHRSS_VERSION="1.1.1"
+ENV FRESHRSS_VERSION="1.1.3-beta"
 
 # System update & install the PHP extensions we need
 # @see http://freshrss.org/#requirements
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y libpng12-dev libjpeg-dev libgmp-dev libgmp10 \
+RUN apt-get update \
+    && apt-get install -y libgmp-dev libgmp10 \
     && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install mbstring \
-    && docker-php-ext-install zip \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
-    && docker-php-ext-install gmp \
-    && docker-php-ext-install pdo_mysql
+    && docker-php-ext-install gmp
 
 # Get FreshRSS and install it
 RUN mkdir -p --mode=777 /var/backup/freshrss \
