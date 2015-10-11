@@ -36,7 +36,9 @@ RUN mkdir -p --mode=777 /var/backup/freshrss \
         --exclude=LICENSE \
         --exclude=tests \
     && rm freshrss.tgz \
-    && chown -Rfv nginx:nginx /usr/src/freshrss
+    && chown -Rfv nginx:nginx /usr/src/freshrss \
+    && sed -i -e "s%doc_root = \"/var/www\"%doc_root = \"/var/www/p\"%g" $PHP_INI_DIR/php.ini \
+    && sed -i -e "s%user_dir = \"/var/www\"%user_dir = \"/var/www/p\"%g" $PHP_INI_DIR/php.ini
 
 # NGINX tuning for FRESHRSS
 COPY ./nginx/conf/sites-enabled/default.conf /etc/nginx/sites-enabled/default.conf
