@@ -13,7 +13,7 @@ FROM amontaigu/nginx-php-plus:5.6.21
 MAINTAINER alban.montaigu@gmail.com
 
 # FreshRSS env variables
-ENV FRESHRSS_VERSION="1.2.0"
+ENV FRESHRSS_VERSION="1.3.1-beta"
 
 # System update & install the PHP extensions we need
 # @see http://freshrss.org/#requirements
